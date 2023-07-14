@@ -70,4 +70,14 @@ public class GestorAlumnos {
             }).collect(Collectors.toList());
         }
     }
+
+    public long lineasFichero(String path) throws IOException {
+        long lineCount = 0;
+        try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
+            while (reader.readLine() != null) {
+                lineCount++;
+            }
+        }
+        return lineCount;
+    }
 }
