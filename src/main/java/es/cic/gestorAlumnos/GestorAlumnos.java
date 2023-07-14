@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class GestorAlumnos {
-    List<Alumno> gestorAlumnos = new ArrayList<>();
+    private List<Alumno> gestorAlumnos = new ArrayList<>();
 
 
     public void addAlumno(Alumno alumno) {
@@ -43,6 +43,10 @@ public class GestorAlumnos {
         return gestorAlumnos;
     }
 
+    public void setGestorAlumnos(List<Alumno> gestorAlumnos) {
+        this.gestorAlumnos = gestorAlumnos;
+    }
+
     public void cargarLista() {
         addAlumno(FactoriaDatos.ALUMNO1.get());
         addAlumno(FactoriaDatos.ALUMNO2.get());
@@ -66,7 +70,7 @@ public class GestorAlumnos {
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             return gestorAlumnos = reader.lines().map(alumno -> {
                 String[] split = alumno.split(",");
-                return new Alumno(Long.parseLong(split[0]), split[1], split[2], 13);
+                return new Alumno(Long.parseLong(split[0]), split[1], split[2], Integer.parseInt(split[3]));
             }).collect(Collectors.toList());
         }
     }

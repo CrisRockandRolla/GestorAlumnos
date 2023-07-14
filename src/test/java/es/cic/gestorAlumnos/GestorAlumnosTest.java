@@ -17,7 +17,7 @@ class GestorAlumnosTest {
 
     @Test
     void addAlumnoTest() {
-        int numAlumnos = gestor.gestorAlumnos.size();
+        int numAlumnos = gestor.getGestorAlumnos().size();
         gestor.addAlumno(FactoriaDatos.ALUMNO_CREATE.get());
         Assertions.assertEquals(4, numAlumnos + 1);
 
@@ -68,17 +68,17 @@ class GestorAlumnosTest {
 
     @Test
     public void generarFicheroTest() throws IOException {
-        gestor.generarFichero(gestor.gestorAlumnos, "src/test/listaAlumnos.txt");
+        gestor.generarFichero(gestor.getGestorAlumnos(), "src/test/listaAlumnos.txt");
         long linesFichero = gestor.lineasFichero("src/test/listaAlumnos.txt");
 
-        Assertions.assertEquals(gestor.gestorAlumnos.size(), linesFichero);
+        Assertions.assertEquals(gestor.getGestorAlumnos().size(), linesFichero);
     }
 
     @Order(Integer.MAX_VALUE)
     @Test
     public void cargarFicheroTest() throws IOException {
-        gestor.gestorAlumnos = gestor.cargarFichero("src/test/listaAlumnos.txt");
+        gestor.setGestorAlumnos(gestor.cargarFichero("src/test/listaAlumnos.txt"));
 
-        Assertions.assertEquals(3, gestor.gestorAlumnos.size());
+        Assertions.assertEquals(3, gestor.getGestorAlumnos().size());
     }
 }
