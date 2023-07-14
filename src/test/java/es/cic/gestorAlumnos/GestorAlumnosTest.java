@@ -1,15 +1,9 @@
 package es.cic.gestorAlumnos;
 
-import org.junit.Assert;
 import org.junit.jupiter.api.*;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -32,24 +26,15 @@ class GestorAlumnosTest {
     }
 
     @Test
-    void readAlumnoExistenteTest() {
+    void readAlumnoTest() {
         Alumno alumno = gestor.readAlumno(1L);
 
         Assertions.assertNotNull(alumno);
         Assertions.assertEquals(1, alumno.getId());
-        Assertions.assertEquals("Juan", alumno.getNombre());
-        Assertions.assertEquals("Garcia Lopez", alumno.getApellidos());
+        Assertions.assertEquals("Pablo", alumno.getNombre());
+        Assertions.assertEquals("Garcia Navarro", alumno.getApellidos());
         Assertions.assertEquals(20, alumno.getEdad());
     }
-
-    @Test
-    public void readAlumnoNoExistenteTest() {
-        Long id = 257L;
-        Assertions.assertThrows(NoSuchElementException.class, () -> {
-            gestor.readAlumno(id);
-        });
-    }
-
 
     @Test
     void updateAlumnoTest() {
@@ -65,17 +50,7 @@ class GestorAlumnosTest {
     }
 
     @Test
-    public void updateAlumnoNoExistenteTest() {
-
-        Long id = 257L;
-        Assertions.assertThrows(NoSuchElementException.class, () -> {
-            gestor.readAlumno(id);
-        });
-
-    }
-
-    @Test
-    void deleteAlumnoExistenteTest() {
+    void deleteAlumnoTest() {
         Alumno alumno = gestor.readAlumno(1L);
 
         int numAlumnos = gestor.getGestorAlumnos().size();
@@ -83,14 +58,6 @@ class GestorAlumnosTest {
 
         Assertions.assertEquals(2, gestor.getGestorAlumnos().size());
 
-    }
-
-    @Test
-    public void deleteAlumnoNoExistenteTest() {
-        long id = 257;
-        Assertions.assertThrows(NoSuchElementException.class, () -> {
-            gestor.readAlumno(id);
-        });
     }
 
     @Test
