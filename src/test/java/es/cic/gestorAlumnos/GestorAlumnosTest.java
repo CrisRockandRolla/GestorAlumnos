@@ -68,8 +68,8 @@ class GestorAlumnosTest {
 
     @Test
     public void generarFicheroTest() throws IOException {
-        gestor.generarFichero(gestor.gestorAlumnos, "src/test/resources/listaAlumnos.txt");
-        long linesFichero = gestor.lineasFichero("src/test/resources/listaAlumnos.txt");
+        gestor.generarFichero(gestor.gestorAlumnos, "src/test/listaAlumnos.txt");
+        long linesFichero = gestor.lineasFichero("src/test/listaAlumnos.txt");
 
         Assertions.assertEquals(gestor.gestorAlumnos.size(), linesFichero);
     }
@@ -77,7 +77,7 @@ class GestorAlumnosTest {
     @Order(Integer.MAX_VALUE)
     @Test
     public void cargarFicheroTest() throws IOException {
-        gestor.gestorAlumnos = gestor.cargarFichero("src/test/resources/listaAlumnos.txt");
+        gestor.gestorAlumnos = gestor.cargarFichero("src/test/listaAlumnos.txt");
 
         Assertions.assertEquals(3, gestor.gestorAlumnos.size());
     }
