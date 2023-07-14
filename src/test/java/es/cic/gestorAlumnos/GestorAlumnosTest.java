@@ -22,17 +22,17 @@ class GestorAlumnosTest {
     }
 
     @Test
-    void addAlumno() {
+    void addAlumnoTest() {
         int numAlumnos = gestor.gestorAlumnos.size();
         gestor.addAlumno(FactoriaDatos.ALUMNO_CREATE.get());
-        Assertions.assertEquals(1, numAlumnos + 1);
+        Assertions.assertEquals(4, numAlumnos + 1);
 
         Alumno alumnoCreado = gestor.readAlumno(4L);
         Assertions.assertNotNull(alumnoCreado);
     }
 
     @Test
-    void readAlumnoExistente() {
+    void readAlumnoExistenteTest() {
         Alumno alumno = gestor.readAlumno(1L);
 
         Assertions.assertNotNull(alumno);
@@ -43,7 +43,7 @@ class GestorAlumnosTest {
     }
 
     @Test
-    public void readAlumnoNoExistente() {
+    public void readAlumnoNoExistenteTest() {
         Long id = 257L;
         Assertions.assertThrows(NoSuchElementException.class, () -> {
             gestor.readAlumno(id);
@@ -52,7 +52,7 @@ class GestorAlumnosTest {
 
 
     @Test
-    void updateAlumno() {
+    void updateAlumnoTest() {
         Alumno alumno = gestor.readAlumno(2L);
         Assertions.assertNotNull(alumno);//casca si es null
 
@@ -65,7 +65,7 @@ class GestorAlumnosTest {
     }
 
     @Test
-    public void updateAlumnoNoExistente() {
+    public void updateAlumnoNoExistenteTest() {
 
         Long id = 257L;
         Assertions.assertThrows(NoSuchElementException.class, () -> {
@@ -75,18 +75,18 @@ class GestorAlumnosTest {
     }
 
     @Test
-    void deleteAlumnoExistente() {
+    void deleteAlumnoExistenteTest() {
         Alumno alumno = gestor.readAlumno(1L);
 
         int numAlumnos = gestor.getGestorAlumnos().size();
         gestor.deleteAlumno(1L);
 
-        Assertions.assertEquals(0, gestor.getGestorAlumnos().size());
+        Assertions.assertEquals(2, gestor.getGestorAlumnos().size());
 
     }
 
     @Test
-    public void deleteAlumnoNoExistente() {
+    public void deleteAlumnoNoExistenteTest() {
         long id = 257;
         Assertions.assertThrows(NoSuchElementException.class, () -> {
             gestor.readAlumno(id);
@@ -94,13 +94,13 @@ class GestorAlumnosTest {
     }
 
     @Test
-    void showAll() {
+    void showAllTest() {
         List<Alumno> alumnos = gestor.showAll();
-        Assertions.assertEquals(0, alumnos.size());
+        Assertions.assertEquals(3, alumnos.size());
     }
 
     @Test
-    public void generarFichero() throws IOException {
+    public void generarFicheroTest() throws IOException {
         gestor.generarFichero(gestor.gestorAlumnos, "src/test/resources/listaAlumnos.txt");
         long linesFichero = gestor.lineasFichero("src/test/resources/listaAlumnos.txt");
 
@@ -109,9 +109,9 @@ class GestorAlumnosTest {
 
     @Order(Integer.MAX_VALUE)
     @Test
-    public void cargarFichero() throws IOException {
+    public void cargarFicheroTest() throws IOException {
         gestor.gestorAlumnos = gestor.cargarFichero("src/test/resources/listaAlumnos.txt");
 
-        Assertions.assertEquals(0, gestor.gestorAlumnos.size());
+        Assertions.assertEquals(3, gestor.gestorAlumnos.size());
     }
 }
