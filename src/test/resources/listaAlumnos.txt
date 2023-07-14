@@ -1,0 +1,3 @@
+1,Juan,Garcia Lopez,20
+2,MariCarmen,Moreno Romero,22
+3,Pedro,Rodriguez Pardo,19

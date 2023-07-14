@@ -4,6 +4,7 @@ package es.cic.gestorAlumnos;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -20,7 +21,7 @@ public class GestorAlumnos {
         return gestorAlumnos.stream()
                 .filter(alumno -> alumno.getId() == id)
                 .findFirst()
-                .orElse(null);
+                .orElseThrow(() -> new NoSuchElementException("Alumno no encontrado con el ID: " + id));
     }
 
     public void updateAlumno(Alumno alumno) {
@@ -31,7 +32,7 @@ public class GestorAlumnos {
     }
 
     public void deleteAlumno(long id) {
-        gestorAlumnos.removeIf(alumno -> alumno.getId() == id);
+        gestorAlumnos.removeIf(alumno -> alumno.getId()==id);
     }
 
     public List<Alumno> showAll() {
@@ -43,19 +44,14 @@ public class GestorAlumnos {
     }
 
     public void cargarLista() {
-//        addAlumno(new Alumno(1, "Juan", "Garcia Lopez", 20));
-//        addAlumno(new Alumno(2, "María", "Moreno Romero", 22));
-//        addAlumno(new Alumno(3, "Pedro", "Rodriguez Pardo", 19));
-
-
-        addAlumno(FactoriaAlumnos.ALUMNO1.get());
-        addAlumno(FactoriaAlumnos.ALUMNO2.get());
-        addAlumno(FactoriaAlumnos.ALUMNO3.get());
+        addAlumno(FactoriaDatos.ALUMNO1.get());
+        addAlumno(FactoriaDatos.ALUMNO2.get());
+        addAlumno(FactoriaDatos.ALUMNO3.get());
     }
 
     public void generarFichero(List<Alumno> alumnos, String filename) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
-            alumnos.stream() .map(alumno -> alumno.getId() + "," + alumno.getNombre() + "," + alumno.getApellidos() + "," + alumno.getEdad() + "\n")
+            alumnos.stream().map(alumno -> alumno.getId() + "," + alumno.getNombre() + "," + alumno.getApellidos() + "," + alumno.getEdad() + "\n")
                     .forEach(alumno -> {
                         try {
                             writer.write(alumno);
@@ -68,10 +64,10 @@ public class GestorAlumnos {
 
     public List<Alumno> cargarFichero(String filename) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
-           return gestorAlumnos = reader.lines().map(alumno -> {
-               String[] split = alumno.split(",");
-               return new Alumno (Long.parseLong(split[0]), split[1], split[2], 13);
-           }).collect(Collectors.toList());
+            return gestorAlumnos = reader.lines().map(alumno -> {
+                String[] split = alumno.split(",");
+                return new Alumno(Long.parseLong(split[0]), split[1], split[2], 13);
+            }).collect(Collectors.toList());
         }
     }
 }
