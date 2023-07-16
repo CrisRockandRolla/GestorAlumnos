@@ -9,16 +9,16 @@ import java.util.List;
 class GestorAlumnosTest {
     GestorAlumnos gestor = new GestorAlumnos();
 
-//    @BeforeEach
-//    public void setup() {
-//        gestor.cargarLista();
-//    }
+    @BeforeEach
+    public void setup() {
+        gestor.cargarLista();
+    }
 
     @Test
     void addAlumnoTest() {
         int numAlumnos = gestor.getGestorAlumnos().size();
         gestor.addAlumno(FactoriaDatos.ALUMNO_CREATE.get());
-        Assertions.assertEquals(1, numAlumnos + 1);
+        Assertions.assertEquals(4, numAlumnos + 1);
 
         Alumno alumnoCreado = gestor.readAlumno(4L);
         Assertions.assertNotNull(alumnoCreado);
@@ -53,9 +53,7 @@ class GestorAlumnosTest {
 
         int numAlumnos = gestor.getGestorAlumnos().size();
         gestor.deleteAlumno(1L);
-
-        Assertions.assertEquals(0, gestor.getGestorAlumnos().size());
-
+        Assertions.assertEquals(2, gestor.getGestorAlumnos().size());
     }
 
     @Test
@@ -64,17 +62,16 @@ class GestorAlumnosTest {
         Assertions.assertEquals(0, alumnos.size());
     }
 
-
     @Test
-    public void generarFichero2Test() throws IOException {
-        long pesoFichero = gestor.generarFichero2("src/test/listaAlumnos.txt");
-        long pesoEsperado = gestor.pesoFichero("src/test/listaAlumnos.txt");
+    public void generarFicheroSerializableTest() throws IOException {
+        long pesoFichero = gestor.generarFicheroSerializable("src/test/listaAlumnos.txt");
+        long pesoEsperado = gestor.pesoFicheroSerializable("src/test/listaAlumnos.txt");
         Assertions.assertEquals(pesoEsperado,pesoFichero);
     }
 
     @Test
-    public void cargarFichero2Test() throws IOException {
-        gestor.setGestorAlumnos(gestor.cargarFichero2("src/test/listaAlumnos.txt"));
+    public void cargarFicheroSerializableTest() throws IOException {
+        gestor.setGestorAlumnos(gestor.cargarFicheroSerializable("src/test/listaAlumnos.txt"));
 
         Assertions.assertEquals(3, gestor.getGestorAlumnos().size());
     }
