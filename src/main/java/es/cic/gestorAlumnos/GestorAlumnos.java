@@ -77,6 +77,35 @@ public class GestorAlumnos {
         }
     }
 
+
+public long generarFichero2(String filename) {
+    long length = 0;
+    try (ByteArrayOutputStream bos = new ByteArrayOutputStream();
+         ObjectOutputStream oos = new ObjectOutputStream(bos)) {
+        oos.writeObject(gestorAlumnos);
+        byte[] data = bos.toByteArray();
+        length = data.length;
+        try (FileOutputStream fos = new FileOutputStream(filename)) {
+            fos.write(data);
+        }
+    } catch (IOException e) {
+        throw new RuntimeException(e);
+    }
+    return length;
+}
+
+    public List<Alumno> cargarFichero2(String filename) {
+        try (FileInputStream fis = new FileInputStream(filename);
+             ObjectInputStream ois = new ObjectInputStream(fis)) {
+            return (List<Alumno>) ois.readObject();
+        } catch (IOException e) {
+            throw new RuntimeException("No se puede encontrar el archivo");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
     public long lineasFichero(String path) throws IOException {
         long lineCount = 0;
         try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
@@ -86,4 +115,31 @@ public class GestorAlumnos {
         }
         return lineCount;
     }
+
+    public long pesoFichero(String path) throws IOException {
+        long peso = 0;
+        File file = new File(path);
+        return file.length();
+    }
+
+
+//    public void generarFichero (String filename){
+//        try ( ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename));) {
+//            oos.writeObject(gestorAlumnos);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
+//
+//
+//
+//    public List<Alumno> cargarFichero2 (String filename){
+//        try ( ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename));) {
+//            return gestorAlumnos = (List<Alumno>) ois.readObject();
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        } catch (ClassNotFoundException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 }

@@ -63,19 +63,51 @@ class GestorAlumnosTest {
         List<Alumno> alumnos = gestor.showAll();
         Assertions.assertEquals(0, alumnos.size());
     }
+//
+//    @Test
+//    public void generarFicheroTest() throws IOException {
+//        gestor.generarFichero(gestor.getGestorAlumnos(), "src/test/listaAlumnos.txt");
+//        long linesFichero = gestor.lineasFichero("src/test/listaAlumnos.txt");
+//
+//        Assertions.assertEquals(gestor.getGestorAlumnos().size(), linesFichero);
+//    }
+//
+//    @Test
+//    public void cargarFicheroTest()  {
+//        gestor.setGestorAlumnos(gestor.cargarFichero("src/test/listaAlumnos.txt"));
+//
+//        Assertions.assertEquals(0, gestor.getGestorAlumnos().size());
+//    }
+
 
     @Test
-    public void generarFicheroTest() throws IOException {
-        gestor.generarFichero(gestor.getGestorAlumnos(), "src/test/listaAlumnos.txt");
-        long linesFichero = gestor.lineasFichero("src/test/listaAlumnos.txt");
-
-        Assertions.assertEquals(gestor.getGestorAlumnos().size(), linesFichero);
+    public void generarFichero2Test() throws IOException {
+        long pesoFichero = gestor.generarFichero2("src/test/listaAlumnos.txt");
+        long pesoEsperado = gestor.pesoFichero("src/test/listaAlumnos.txt");
+        Assertions.assertEquals(pesoEsperado,pesoFichero);
     }
 
     @Test
-    public void cargarFicheroTest()  {
-        gestor.setGestorAlumnos(gestor.cargarFichero("src/test/listaAlumnos.txt"));
+    public void cargarFichero2Test() throws IOException {
+        gestor.setGestorAlumnos(gestor.cargarFichero2("src/test/listaAlumnos.txt"));
 
-        Assertions.assertEquals(0, gestor.getGestorAlumnos().size());
+        Assertions.assertEquals(3, gestor.getGestorAlumnos().size());
     }
+
+//    @Test
+//    public void generarFichero2Test() throws IOException {
+//        gestor.generarFichero("src/test/listaAlumnos1.txt");
+//        long peso = gestor.pesoFichero("src/test/listaAlumnos1.txt");
+//        Assertions.assertTrue(peso>0);
+//    }
+//
+//    @Order(Integer.MAX_VALUE)
+//    @Test
+//    public void cargarFichero2Test() throws IOException {
+//        gestor.setGestorAlumnos(gestor.cargarFichero2("src/test/listaAlumnos.txt"));
+//
+//        Assertions.assertEquals(3, gestor.getGestorAlumnos().size());
+//    }
+
+
 }
