@@ -122,24 +122,4 @@ public long generarFichero2(String filename) {
         return file.length();
     }
 
-
-//    public void generarFichero (String filename){
-//        try ( ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename));) {
-//            oos.writeObject(gestorAlumnos);
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
-//
-//
-//
-//    public List<Alumno> cargarFichero2 (String filename){
-//        try ( ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename));) {
-//            return gestorAlumnos = (List<Alumno>) ois.readObject();
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        } catch (ClassNotFoundException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
 }
