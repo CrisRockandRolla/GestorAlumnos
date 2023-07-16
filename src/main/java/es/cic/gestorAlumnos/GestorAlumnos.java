@@ -60,18 +60,20 @@ public class GestorAlumnos {
                         try {
                             writer.write(alumno);
                         } catch (IOException e) {
-                            throw new RuntimeException(e);
+                            throw new RuntimeException("No se ha podido generar el fichero");
                         }
                     });
         }
     }
 
-    public List<Alumno> cargarFichero(String filename) throws IOException {
+    public List<Alumno> cargarFichero(String filename)  {
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             return gestorAlumnos = reader.lines().map(alumno -> {
                 String[] split = alumno.split(",");
                 return new Alumno(Long.parseLong(split[0]), split[1], split[2], Integer.parseInt(split[3]));
             }).collect(Collectors.toList());
+        }catch (IOException e){
+            throw new RuntimeException("El fichero que quiere cargar aun no existe. Introduzca alumnos");
         }
     }
 
